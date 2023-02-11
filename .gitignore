@@ -1,4 +1,5 @@
 .env
+drafts/*.json
 vendor
 composer.lock
 .beam
