@@ -2,7 +2,7 @@
     require_once 'boot.php';
 
 
-    $draft = get_draft(get('draft'));
+    $draft = get_draft_local(get('draft'));
     $unclaim = get('unclaim') == 1;
 
     $p = &$draft['draft']['players'][get('player')];
@@ -12,7 +12,7 @@
             return_error('Already unclaimed');
         } else {
             $p['claimed'] = false;
-            $result = save_draft($draft);
+            $result = save_draft_local($draft);
             return_data([
                 'draft' => $draft,
                 'player' => $p['id'],
@@ -24,7 +24,7 @@
             return_error('Already claimed');
         } else {
             $p['claimed'] = true;
-            $result = save_draft($draft);
+            $result = save_draft_local($draft);
             return_data([
                 'draft' => $draft,
                 'player' => $p['id'],

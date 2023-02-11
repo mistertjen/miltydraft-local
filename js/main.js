@@ -63,7 +63,7 @@ $(document).ready(function() {
             } else {
                 localStorage.setItem('admin_' + data.id, data.admin);
 
-                window.location.href = "d/" + data.id;
+                window.location.href = "draft.php?id=" + data.id;
             }
             // alert("Success: " + r.responseText);
         };

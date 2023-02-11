@@ -36,6 +36,16 @@ function get_draft($id) {
     return $draft;
 }
 
+function get_draft_local($id) {
+    // $draft = file_get_contents('https://' . $_ENV['BUCKET'] . '.' . $_ENV['REGION'] . '.digitaloceanspaces.com/draft_' . $id . '.json');
+    $draft = file_get_contents('drafts/' . $id . '.json', "w") or die("Unable to open file!");;
+    $draft = json_decode($draft, true);;
+
+    if($draft == false) return null;
+
+    return $draft;
+}
+
 function return_error($err) {
     die(json_encode(['error' => $err]));
 }
@@ -53,8 +63,14 @@ function ordinal($number) {
         return $number. $ends[$number % 10];
 }
 
-function save_draft($draft) {
+function save_draft_local($draft) {
+  $file = fopen('drafts/' . $draft['id'] . '.json', "w") or die("Unable to create file!");
+  $contents = json_encode($draft);
+  fwrite($file, $contents);
+  fclose($file);
+}
 
+function save_draft($draft) {
     $s3 = new \Aws\S3\S3Client([
         'version' => 'latest',
         'region'  => 'us-east-1',

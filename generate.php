@@ -68,10 +68,10 @@
         $result = [
             'id' => $id,
             'factions' => $factions,
-            'admin_pass' => $admin_password,
+            // 'admin_pass' => $admin_password,
             'config' => $config->toJson(),
             'slices' => convert_slices_data($slices),
-            'url' => 'https://' . $_ENV['BUCKET'] . '.' . $_ENV['REGION'] . '.digitaloceanspaces.com/draft_' . $id . '.json',
+            // 'url' => 'https://' . $_ENV['BUCKET'] . '.' . $_ENV['REGION'] . '.digitaloceanspaces.com/draft_' . $id . '.json',
             'draft' => [
                 'players' => $player_data,
                 'current' => $first_player,
@@ -81,7 +81,7 @@
             ]
         ];
 
-        save_draft($result);
+        save_draft_local($result);
 
         return_data([
             'id' => $id,

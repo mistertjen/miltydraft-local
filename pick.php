@@ -7,7 +7,7 @@
     $category = get('category');
     $value = get('value');
 
-    $draft = get_draft($id);
+    $draft = get_draft_local($id);
 
     $is_admin = ($draft['admin_pass'] == get('admin'));
     if($draft == null) return_error('draft not found');
@@ -62,7 +62,7 @@
     }
 
 
-    save_draft($draft);
+    save_draft_local($draft);
 
     return_data([
         'draft' => $draft,
